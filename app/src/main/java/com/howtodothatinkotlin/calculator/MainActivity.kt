@@ -60,6 +60,8 @@ class MainActivity : AppCompatActivity() {
 
         val opListener = View.OnClickListener { v ->
             val op = (v as Button).text.toString()
+
+            //check for just a decimal
             try {
                 val value = newNumber.text.toString().toDouble()
                 performOperation(value, op)
