@@ -2,12 +2,19 @@ package com.howtodothatinkotlin.calculator
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
+
+const val STATE_PENDING_OPERATION = "operation contents"
+const val STATE_OPERAND1 = "operand1 contents"
 
 class MainActivity : AppCompatActivity() {
+
+
 
     val result by lazy {findViewById<EditText>(R.id.result)}
     val newNumber by lazy { findViewById<EditText>(R.id.newNumber) }
@@ -104,5 +111,22 @@ class MainActivity : AppCompatActivity() {
 
         result.setText(operand1.toString())
         newNumber.setText("")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        operand1 = savedInstanceState.getDouble(STATE_OPERAND1)
+        pendingOperation = savedInstanceState.getString(STATE_PENDING_OPERATION)
+
+        displayOperation.text = pendingOperation
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (operand1 != null){
+            outState.putDouble(STATE_OPERAND1, operand1!!)
+        }
+        outState.putString(STATE_PENDING_OPERATION, pendingOperation!!)
+
     }
 }
