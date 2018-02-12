@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.howtodothatinkotlin.calculator.MainActivity">
 
+
     <EditText
         android:id="@+id/result"
         android:layout_width="wrap_content"
