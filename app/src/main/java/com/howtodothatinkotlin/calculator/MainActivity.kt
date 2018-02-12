@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
     val displayOperation by lazy { findViewById<TextView>(R.id.operation) }
 
     var operand1: Double? = null
-    var operand2: Double = 0.0
     var pendingOperation = "="
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +60,11 @@ class MainActivity : AppCompatActivity() {
 
         val opListener = View.OnClickListener { v ->
             val op = (v as Button).text.toString()
-            val value = newNumber.text.toString()
-            if (value.isNotEmpty()) {
+            try {
+                val value = newNumber.text.toString().toDouble()
                 performOperation(value, op)
+            } catch (e: NumberFormatException){
+                newNumber.setText("")
             }
             pendingOperation = op
             displayOperation.text = pendingOperation
@@ -76,26 +77,25 @@ class MainActivity : AppCompatActivity() {
         buttonPlus.setOnClickListener(opListener)
     }
 
-    fun performOperation(value: String, operation: String) {
+    fun performOperation(value: Double, operation: String) {
         if (operand1 == null) {
-            operand1 = value.toDouble()
+            operand1 = value
         } else {
-            operand2 = value.toDouble()
 
             if (pendingOperation == "=") {
                 pendingOperation = operation
             }
 
             when (pendingOperation) {
-                "=" -> operand1 = operand2
-                "/" -> if (operand2 == 0.0) {
-                    operand1 = Double.NaN
+                "=" -> operand1 = value
+                "/" -> operand1 = if (value == 0.0) {
+                    Double.NaN
                 } else {
-                    operand1 = operand1!! / operand2
+                    operand1!! / value
                 }
-                "*" -> operand1 = operand1!! * operand2
-                "-" -> operand1 = operand1!! - operand2
-                "+" -> operand1 = operand1!! + operand2
+                "*" -> operand1 = operand1!! * value
+                "-" -> operand1 = operand1!! - value
+                "+" -> operand1 = operand1!! + value
 
             }
         }
