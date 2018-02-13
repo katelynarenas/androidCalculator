@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    val result by lazy {findViewById<EditText>(R.id.result)}
-    val newNumber by lazy { findViewById<EditText>(R.id.newNumber) }
-    val displayOperation by lazy { findViewById<TextView>(R.id.operation) }
+    //val result by lazy {findViewById<EditText>(R.id.result)}
+    //val newNumber by lazy { findViewById<EditText>(R.id.newNumber) }
+    //val displayOperation by lazy { findViewById<TextView>(R.id.operation) }
 
     var operand1: Double? = null
     var pendingOperation = "="
@@ -28,25 +28,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //data input button
-        val button0 = findViewById<Button>(R.id.button0)
-        val button1 = findViewById<Button>(R.id.button1)
-        val button2 = findViewById<Button>(R.id.button2)
-        val button3 = findViewById<Button>(R.id.button3)
-        val button4 = findViewById<Button>(R.id.button4)
-        val button5 = findViewById<Button>(R.id.button5)
-        val button6 = findViewById<Button>(R.id.button6)
-        val button7 = findViewById<Button>(R.id.button7)
-        val button8 = findViewById<Button>(R.id.button8)
-        val button9 = findViewById<Button>(R.id.button9)
-        val buttonDot = findViewById<Button>(R.id.buttonDot)
-
-        //operation buttons
-        val buttonEquals = findViewById<Button>(R.id.buttonEquals)
-        val buttonDivide = findViewById<Button>(R.id.buttonDivide)
-        val buttonMultiply = findViewById<Button>(R.id.buttonMultiply)
-        val buttonMinus = findViewById<Button>(R.id.buttonMinus)
-        val buttonPlus = findViewById<Button>(R.id.buttonPlus)
+//        //data input button
+//        val button0 = findViewById<Button>(R.id.button0)
+//        val button1 = findViewById<Button>(R.id.button1)
+//        val button2 = findViewById<Button>(R.id.button2)
+//        val button3 = findViewById<Button>(R.id.button3)
+//        val button4 = findViewById<Button>(R.id.button4)
+//        val button5 = findViewById<Button>(R.id.button5)
+//        val button6 = findViewById<Button>(R.id.button6)
+//        val button7 = findViewById<Button>(R.id.button7)
+//        val button8 = findViewById<Button>(R.id.button8)
+//        val button9 = findViewById<Button>(R.id.button9)
+//        val buttonDot = findViewById<Button>(R.id.buttonDot)
+//
+//        //operation buttons
+//        val buttonEquals = findViewById<Button>(R.id.buttonEquals)
+//        val buttonDivide = findViewById<Button>(R.id.buttonDivide)
+//        val buttonMultiply = findViewById<Button>(R.id.buttonMultiply)
+//        val buttonMinus = findViewById<Button>(R.id.buttonMinus)
+//        val buttonPlus = findViewById<Button>(R.id.buttonPlus)
 
         val listener = View.OnClickListener { v ->
             val b = v as Button
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 newNumber.setText("")
             }
             pendingOperation = op
-            displayOperation.text = pendingOperation
+            operation.text = pendingOperation
         }
 
         buttonEquals.setOnClickListener(opListener)
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
 
         pendingOperation = savedInstanceState.getString(STATE_PENDING_OPERATION)
 
-        displayOperation.text = pendingOperation
+        operation.text = pendingOperation
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
