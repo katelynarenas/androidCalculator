@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 const val STATE_PENDING_OPERATION = "operation contents"
 const val STATE_OPERAND1 = "operand1 contents"
+const val STATE_OPERAND1_STORED = "operand1_stored"
 
 class MainActivity : AppCompatActivity() {
 
@@ -115,7 +116,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        operand1 = savedInstanceState.getDouble(STATE_OPERAND1)
+        operand1 = if (savedInstanceState.getBoolean(STATE_OPERAND1_STORED, false)){
+            savedInstanceState.getDouble(STATE_OPERAND1)
+        } else {
+            null
+        }
+
         pendingOperation = savedInstanceState.getString(STATE_PENDING_OPERATION)
 
         displayOperation.text = pendingOperation
@@ -125,6 +131,7 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         if (operand1 != null){
             outState.putDouble(STATE_OPERAND1, operand1!!)
+            outState.putBoolean(STATE_OPERAND1_STORED, true)
         }
         outState.putString(STATE_PENDING_OPERATION, pendingOperation!!)
 
