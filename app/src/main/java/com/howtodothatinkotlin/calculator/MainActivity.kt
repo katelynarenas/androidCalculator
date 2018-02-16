@@ -85,6 +85,20 @@ class MainActivity : AppCompatActivity() {
         buttonMultiply.setOnClickListener(opListener)
         buttonMinus.setOnClickListener(opListener)
         buttonPlus.setOnClickListener(opListener)
+
+        buttonNegative.setOnClickListener(negListener)
+    }
+
+    val negListener = View.OnClickListener { v ->
+        if (newNumber.text.toString() == ""){
+            newNumber.setText("-")
+        } else if (newNumber.text.toString() == "-"){
+            newNumber.setText("")
+        } else {
+            var boobie = newNumber.text.toString().toDouble()
+            boobie = boobie * -1
+            newNumber.setText(boobie.toString())
+        }
     }
 
     fun performOperation(value: Double, operation: String) {
