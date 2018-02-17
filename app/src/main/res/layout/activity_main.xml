@@ -8,6 +8,18 @@
     tools:context="com.howtodothatinkotlin.calculator.MainActivity">
 
 
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:maxWidth="90dp"
+        android:minWidth="48dp"
+        android:text="Clear"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonMultiply"
+        app:layout_constraintStart_toEndOf="@+id/buttonMultiply"/>
+
     <EditText
         android:id="@+id/result"
         android:layout_width="wrap_content"
@@ -235,11 +247,12 @@
         android:id="@+id/buttonNegative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:maxWidth="48dp"
         android:minWidth="48dp"
         android:text="Neg"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button7"
-        app:layout_constraintEnd_toStartOf="@+id/button7"/>
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonDivide"
+        app:layout_constraintStart_toEndOf="@+id/buttonDivide"/>
 
 </android.support.constraint.ConstraintLayout>
