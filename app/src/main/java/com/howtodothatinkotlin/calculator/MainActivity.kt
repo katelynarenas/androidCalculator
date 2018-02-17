@@ -2,11 +2,8 @@ package com.howtodothatinkotlin.calculator
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val STATE_PENDING_OPERATION = "operation contents"
@@ -16,8 +13,8 @@ const val STATE_OPERAND1_STORED = "operand1_stored"
 class MainActivity : AppCompatActivity() {
 
 
-    var operand1: Double? = null
-    var pendingOperation = "="
+    private var operand1: Double? = null
+    private var pendingOperation = "="
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,13 +61,13 @@ class MainActivity : AppCompatActivity() {
         buttonNegative.setOnClickListener(negListener)
 
         buttonClear.setOnClickListener(
-                View.OnClickListener{newNumber.setText("");
-                    result.setText("");
+                {newNumber.setText("")
+                    result.setText("")
                     operand1 = null}
         )
     }
 
-    val negListener = View.OnClickListener { v ->
+    private val negListener = View.OnClickListener { v ->
         if(newNumber.text.toString() == "."){
             newNumber.setText("-0.0")
         }else if (newNumber.text.toString() == ""){
@@ -79,12 +76,12 @@ class MainActivity : AppCompatActivity() {
             newNumber.setText("")
         } else {
             var boobie = newNumber.text.toString().toDouble()
-            boobie = boobie * -1
+            boobie *= -1
             newNumber.setText(boobie.toString())
         }
     }
 
-    fun performOperation(value: Double, operation: String) {
+    private fun performOperation(value: Double, operation: String) {
         if (operand1 == null) {
             operand1 = value
         } else {
@@ -130,7 +127,7 @@ class MainActivity : AppCompatActivity() {
             outState.putDouble(STATE_OPERAND1, operand1!!)
             outState.putBoolean(STATE_OPERAND1_STORED, true)
         }
-        outState.putString(STATE_PENDING_OPERATION, pendingOperation!!)
+        outState.putString(STATE_PENDING_OPERATION, pendingOperation)
 
     }
 }
