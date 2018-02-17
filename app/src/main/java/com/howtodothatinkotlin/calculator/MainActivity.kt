@@ -64,7 +64,9 @@ class MainActivity : AppCompatActivity() {
         buttonNegative.setOnClickListener(negListener)
 
         buttonClear.setOnClickListener(
-                View.OnClickListener{newNumber.setText("");result.setText("")}
+                View.OnClickListener{newNumber.setText("");
+                    result.setText("");
+                    operand1 = null}
         )
     }
 
